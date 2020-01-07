@@ -1,0 +1,47 @@
+<html>
+  
+<script>
+
+    function EventOnClick(event){
+            int1 = document.getElementById('int1').value;
+            int2 = document.getElementById('int2').value;
+            data = {'k1': int1, 
+            'k2': int2};
+
+            var body = JSON.stringify(data);
+            //var url = location.host + "/req";
+            var url = "/hs/req";
+            
+            var request = new XMLHttpRequest();
+            request.open("POST", url);
+
+            var csrfCookie = document.cookie.match(/CSRF-TOKEN=([\w-]+)/);
+            if (csrfCookie) {
+                request.setRequestHeader("X-CSRF-TOKEN", csrfCookie[1]);
+            } else {
+                request.setRequestHeader("X-CSRF-TOKEN", "dfasf");
+            }
+
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.onreadystatechange = function() {
+                if (request.readyState == 4 && request.status == 200) {
+                    message = JSON.parse(request.responseText);
+                    document.getElementById('k1').innerHTML=message.k1;
+                    document.getElementById('k2').innerHTML=message.k2;}
+                };
+
+            request.send(body);
+            
+    };
+        
+  </script>
+
+
+   <body>
+     <p>число 1: <input type="number" id="int1"></p>
+     <p>число 2: <input type="number" id="int2"></p>
+     <p><input type="button" name="button" value = "Найти" onclick="EventOnClick()"></p>
+     <li id="k1"> s </li>
+     <li id="k2"> x </li>
+   </body>
+ </html>

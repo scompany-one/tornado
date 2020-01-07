@@ -1,0 +1,42 @@
+<html>
+  
+  <script>
+    var updater = {
+    socket: null,
+
+    start: function() {
+        if(updater.socket && updater.socket.readyState !== updater.socket.CLOSED) return;
+        var url = "ws://" + location.host + "/ws/service";
+        updater.socket = new WebSocket(url);
+        updater.socket.onmessage = function(event) {
+            updater.showMessage(JSON.parse(event.data));
+        }
+    },
+    showMessage: function(message) {
+        document.getElementById('k1').innerHTML=message.k1;
+        document.getElementById('k2').innerHTML=message.k2;
+            }
+    }
+
+    function EventOnClick(event){
+            int1 = document.getElementById('int1').value;
+            int2 = document.getElementById('int2').value;
+            data = {'k1': int1, 
+            'k2': int2};
+
+            updater.socket.send(JSON.stringify(data));
+        }
+
+    window.onload = function(){
+        updater.start();
+    }
+  </script>
+
+   <body>
+     <p>число 1: <input type="number" id="int1"></p>
+     <p>число 2: <input type="number" id="int2"></p>
+     <p><input type="button" name="button" value = "Найти" onclick="EventOnClick()"></p>
+     <li id="k1"> s </li>
+     <li id="k2"> x </li>
+   </body>
+ </html>
