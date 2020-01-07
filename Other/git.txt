@@ -1,0 +1,13 @@
+﻿# запускаем git (из проводника)
+
+# переходим в рабочую папку всех проектов
+cd ....
+
+# скачиваем папку из репозитария
+git clone https://github.com/scompany-one/tornado_git.git
+
+# переходим в папку нового проекта
+
+# настраиваем владельца прокта
+git config user.name scompany
+git config user.email scompany@inbox.ru
