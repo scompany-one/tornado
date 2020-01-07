@@ -11,3 +11,13 @@ git clone https://github.com/scompany-one/tornado_git.git
 # настраиваем владельца прокта
 git config user.name scompany
 git config user.email scompany@inbox.ru
+
+#основые команды
+# добавить файл для изменений
+git add файл
+
+# коммит
+git commit -m "...."
+
+# отправить в репозитарий
+git push
