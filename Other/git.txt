@@ -20,4 +20,7 @@ git add файл
 git commit -m "...."
 
 # отправить в репозитарий
-git push
+git push origin master
+
+# в файле .git\info\exclude
+# содержиться шаблоны для исключения для анализа файлов к изменению
